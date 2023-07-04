@@ -1,36 +1,55 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');	//protection fichier
 class Profil extends CI_Controller
-{	
+{
 	public function __construct(){
         parent::__construct();
 		$this->load->view('headerResponsive');
     }
 	public function index()
 	{
-		// $this->load->view('headerResponsive');
+		redirect('Accueil/show');
 	}
-	//inscription
+
 	public function sinscrire(){
 		$this->load->view('profil/inscription');
+        $this->load->view('footer');
 	}
-	
+
 	public function inscriptionFoyer(){
 		$this->load->model('OperationModel');
 		$all['all'] = $this->OperationModel->select_gen('emplacement');
 		$this->load->view('profil/inscriptionFoyer',$all);
+        $this->load->view('footer');
 	}
-	
-	public function confirmerFoyer(){
+
+	/*public function confirmerFoyer(){
 		$this->load->model('OperationModel');
 		$data = array();
 		$data['nom']=$this->input->get('nomFoyer');
 		$data['idemplacement'] = $this->input->get('idEmplacement');
-		$data['motDePasse'] = $this->input->get('mdp');
-		// var_dump($data);
+		$data['motdepasse'] = $this->input->get('mdp');
 		$this->OperationModel->insert_gen('foyer',$data);
 		$this->load->view('profil/inscription');
+        $this->load->view('footer');
+	}*/
+
+	public function confirmerFoyer(){
+		$this->load->model('OperationModel');
+		$data = array();
+		$data['nom'] = $this->input->get('nomFoyer');
+		$data['idemplacement'] = $this->input->get('idEmplacement');
+		$data['motdepasse'] = $this->input->get('mdp');
+		$this->OperationModel->insert_gen('foyer', $data);
+
+		// Récupérer l'ID du foyer enregistré
+		$idFoyer = $this->db->insert_id();
+		$_SESSION['foyer'] = $idFoyer;
+
+		$this->load->view('profil/inscription', array('idFoyer' => $idFoyer));
+		$this->load->view('footer');
 	}
+
 	public function confirmerInscription(){
 		date_default_timezone_set('Africa/Nairobi');
 		$this->load->model('ProfilModel');
@@ -38,28 +57,37 @@ class Profil extends CI_Controller
 		$nom_foyer = $this->input->get('nomFoyer');
 		$idFoyer = $this->ProfilModel->get_by_id("foyer",$nom_foyer,"nom");
 		if ($idFoyer) {
-			$data['idFoyer'] = $idFoyer->idFoyer;
-		} else {}
-		$data['nom'] = $this->input->get('nom');
-		$data['prenom'] = $this->input->get('prenom');
-		$data['dateDeNaissance'] = $this->input->get('dtn');
-		$data['email'] = $this->input->get('email');
-		$data['numero'] = $this->input->get('numero');
-		$data['motDePasse'] = $this->input->get('motDePasse');
-		$message = "";
-
-		//la dtn doit etre plus de 3ans
-		if($this->ProfilModel->check_date($data['dateDeNaissance'])){
-			$message="donnée ajouté avec succes";
-			$this->ProfilModel->insert("utilisateur",$data);
+			$data['idfoyer'] = $idFoyer->idfoyer;
 		}
 
-		else{
-			$message="erreur de validation(la date de naissance doit etre plus de trois ans)";
+		$data['nom'] = $this->input->get('nom');
+		$data['prenom'] = $this->input->get('prenom');
+		$data['datedenaissance'] = $this->input->get('dtn');
+		$data['email'] = $this->input->get('email');
+		$data['numero'] = $this->input->get('numero');
+		$data['motdepasse'] = $this->input->get('motDePasse');
+		//$data['idfoyer'] = $idFoyer;
+
+		$data_pack['idfoyer'] = $data['idfoyer'];
+		$this->ProfilModel->insert("pack",$data_pack);
+
+
+		$message['msg'] = "";
+
+		//la dtn doit etre plus de 10ans
+		if($this->ProfilModel->check_date($data['datedenaissance'])){
+			$this->ProfilModel->insert("utilisateur",$data);
+			$message['msg']="donnée ajouté avec succes";
+
+		}
+
+		else if($this->ProfilModel->check_date($data['datedenaissance'])){
+			$message['msg']="erreur!votre foyer n'existe pas ou votre date de naissance est moins de 10 ans";
 		}
 
 		$this->load->view('profil/inscription',$message);
-			
+        $this->load->view('footer');
+
 	}
 
 // se connecter
@@ -74,8 +102,10 @@ class Profil extends CI_Controller
 		// var_dump($data);
 		$this->load->model('ProfilModel');
 		$utilisateur = $this->ProfilModel->getUtilisateur($data);
-		// var_dump($utilisateur);
 		$_SESSION['utilisateur'] = $utilisateur;
+		$idUtilisateur = $utilisateur->idutilisateur;
+
+		$this->session->set_userdata('user', $idUtilisateur);
 		redirect('mysession/profil');
 	}
 // ventes des articles
@@ -86,6 +116,7 @@ class Profil extends CI_Controller
 		$all['all'] = $this->ProfilModel->get($requete);
 		// var_dump($all);
 		$this->load->view('ventes/index',$all);
+        $this->load->view('footer');
 		// $this->load->view('footer');
 	}
 
@@ -96,7 +127,7 @@ class Profil extends CI_Controller
 
 
 
-	//Contact 
+	//Contact
 	public function aboutus()
 	{
 		$this->load->view('templates/header');

@@ -86,7 +86,7 @@ create table payement(
  prix float not null,
  foreign key (idUtilisateur) references utilisateur(idUtilisateur)
 ); 
-insert into emplacement values(1 , Ambalavao Haute Matsiatra ,default,default);
+insert into emplacement values(1 , 'Ambalavao Haute Matsiatra' ,default,default);
 insert into emplacement values(2 , 'Ambanja Région Diana ',default,default);
 insert into emplacement values(3 , 'Ambato-Boeny Boeny ',default,default);
 insert into emplacement values(4 , 'Ambatofinandrahana Amoron i Mania ',default,default);

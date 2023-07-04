@@ -11,12 +11,8 @@
   </head>
   <body>
     <header>
-      <img src="<?php echo base_url('assets/logo0.svg'); ?>" alt="" srcset="" />
+      <img src="<?php echo base_url('assets/logotranoko.png'); ?>" alt="" srcset="" />
       <ul>
-        <a href="<?php echo site_url('debut/premierepage');?>">
-          <li>Accueil</li>
-          <span></span>
-        </a>
         <a href="<?php echo site_url('profil/articles'); ?>">
           <li>Panier</li>
           <span></span>
@@ -33,6 +29,11 @@
           <li>Profil</li>
           <span></span>
         </a>
+
+        <a href="<?php echo site_url('PayementController/lien_payement'); ?>">
+          <li>Payement</li>
+          <span></span>
+        </a>
       </ul>
       <div class="icon-bars">
         <span></span>
@@ -40,16 +41,16 @@
       <div class="login">
           <ul>
           <li><a href="<?php echo site_url('aide/com/id/0'); ?>"><i class="fas fa-capsules"></i></a></li>
-              <li><a href="#"><i class="fas fa-bell"></i></a></li>
+              <li><a href="<?php echo site_url('NotificationController/show_notification'); ?>"><i class="fas fa-bell"></i></a></li>
               <?php if(!isset($_SESSION['utilisateur'])){  ?>
-                  <li><a href="<?php echo site_url('mysession/profil'); ?>"><i class="fas fa-file-signature"></i></a></li>
-                  <?php } else { ?> 
+                  <li><a href="<?php echo site_url('mysession/profil'); ?>"><i class="fas fa-user"></i></a></li>
+                  <?php } else { ?>
                   <li><a href="<?php echo site_url('mysession/logout'); ?>"><i class="fas fa-sign-out-alt"></i></a></li>
-                  <?php } ?> 
+              <?php } ?>
           </ul>
-         
+
       </div>
     </header>
   <script src="<?php echo base_url('assets/news/js/index.js'); ?>"></script>
-  
+
 

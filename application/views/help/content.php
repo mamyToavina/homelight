@@ -7,7 +7,6 @@
 
 </style>
 <div class="container">
-<h1>Here</h1>
     <div class="row">
         <p><?php echo $all; ?></p>
     </div>

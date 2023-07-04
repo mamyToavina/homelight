@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class NotificationModel extends CI_Model{
-    function getAllNotifForMe($idPack){
-        $requete = "select * from notification  join utilisateur on notification.idutilisateur=utilisateur.idutilisateur where idPack = %s and dateNotif>=current_date-2 order by dateNotif";
-        $requete = sprintf($requete,$this->db->escape($idPack));
+    function getAllNotifForMe(){
+        $requete = "select * from notification  join utilisateur on notification.idutilisateur=utilisateur.idutilisateur where dateNotif>=current_date-2 order by dateNotif";
+        // $requete = sprintf($requete,$this->db->escape($idPack));
         $sql=$this->db->query($requete);
         $re=array();
         foreach($sql->result_array() as $row){
@@ -16,7 +16,7 @@ class NotificationModel extends CI_Model{
             $valiny['note'] = explode(";",$re[$i]['action']);
             $valiny['note'] = $valiny['note'][0];
             $valiny['lien'] = explode(";",$re[$i]['action']);
-            $valiny['lien'] =trim($valiny['lien'][1]);
+            // $valiny['lien'] =trim($valiny['lien'][1]);
             $th[] = $valiny;
         }
         return $th;

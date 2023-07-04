@@ -1,11 +1,11 @@
-<?php 
+<?php
 defined('BASEPATH') or exit('No direct script access allowed');	//protection fichier
 class Mysession extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
-        if($this->session->has_userdata('utilisateur') == false) 
+        if($this->session->has_userdata('utilisateur') == false)
         {
             redirect('profil/seconnecter');
         }
@@ -15,6 +15,8 @@ class Mysession extends CI_Controller {
         $all['all'] = $_SESSION['utilisateur'];
         // var_dump($all);
         $this->load->view('profil/monprofil',$all);
+        $this->load->view('footer');
+
     }
     public function logout(){
         // $_SESSION['utilisateur']; le destroy tsy tadidiko
@@ -35,6 +37,7 @@ class Mysession extends CI_Controller {
         $all['all']=$this->ProfilModel->getAllProduits($id);
         // var_dump($all['all']);
         $this->load->view('profil/appareils',$all);
+        $this->load->view('footer');
     }
     public function inserer(){
         $id=$_SESSION['utilisateur']['idutilisateur'];
@@ -43,7 +46,7 @@ class Mysession extends CI_Controller {
         $all['all']=$this->ProfilModel->getAllProduits($id);
         $this->load->view('help/helpMenu');
         $this->load->view('help/insert',$all);
-        
+        $this->load->view('footer');
     }
     public function disfonc(){
         $data=array();
@@ -62,6 +65,7 @@ class Mysession extends CI_Controller {
         // var_dump($data);
         $this->OperationModel->insert_gen('disfonctionnement',$data);
         $this->load->view('help/confirmation');
+        $this->load->view('footer');
     }
     public function turnon(){
         $this->load->model('ProfilModel');
@@ -70,7 +74,8 @@ class Mysession extends CI_Controller {
     }
     public function turnoffrequest(){
        $id['id'] = $this->input->get('id');
-        $this->load->view('profil/changement',$id); 
+        $this->load->view('profil/changement',$id);
+        $this->load->view('footer');
     }
     public function turnoff(){
         $data=array();

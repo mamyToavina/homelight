@@ -12,7 +12,7 @@
                         <p>Les produits disponibles chez nous</p>
                     </div>
                 </div>
-               
+
                 <div class="row">
                     <?php for($t=0;$t<count($all);$t++){ ?>
                     <div class="col-md-4 text-center animate-box">
@@ -20,7 +20,7 @@
                             <div class="product-grid" style="background-image:url(<?php echo base_url('assets/images/adapteur.jpg'); ?>);">
                                 <div class="inner">
                                     <p>
-                                        <a href="<?php echo site_url('mysession/acheter?id='.$all[$t]['idproduitsdevente']); ?>" class="icon"><i class="fas fa-shopping-bag"></i></a>
+                                        <a href="<?php echo site_url('Panier/show_panier?id='.$all[$t]['idproduitsdevente']); ?>" class="icon"><i class="fas fa-shopping-bag"></i></a>
                                     </p>
                                 </div>
                             </div>
@@ -30,9 +30,9 @@
                             </div>
                         </div>
                     </div>
-                    <?php } ?>	
+                    <?php } ?>
                 </div>
-               
+
             </div>
 	</div>
 </div>

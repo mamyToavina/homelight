@@ -17,10 +17,13 @@ create table detailproduitphoto(
 
 );
 
-insert into foyer values(default,'Rakoto','root',28);
+
+
 insert into utilisateur values(default,'Miora','Oliva','09-09-2004',1,'vm@gmail.com','0340000000','root',1);
 
 insert into pack values(default,'18-06-2023',1);
+
+insert into pack values(default,'18-07-2023',2);
 
 insert into produit values(default,'cuisine',250,1,null,'lampe pour la cuisine');
 insert into produit values(default,'couloir',250,1,null,'interrupteur pour la cuisine');
@@ -34,12 +37,12 @@ insert into produitonoff values(2,to_timestamp('2019/06/10 10:00:00','yyyy/mm/dd
 insert into produitonoff values(3,to_timestamp('2019/06/10 10:00:00','yyyy/mm/dd hh:mi:ss'),current_timestamp);
 
 
-select pack.idfoyer from pack join utilisateur on pack.idfoyer=utilisateur.idfoyer where utilisateur.idutilisateur=
+-- select pack.idfoyer from pack join utilisateur on pack.idfoyer=utilisateur.idfoyer where utilisateur.idutilisateur=
 
-select consommationJour.* from produit
-join consommationJour on produit.idproduit=consommationJour.idproduit
-join pack on produit.idpack=pack.idpack
-where pack.idfoyer=
+-- select consommationJour.* from produit
+-- join consommationJour on produit.idproduit=consommationJour.idproduit
+-- join pack on produit.idpack=pack.idpack
+-- where pack.idfoyer=
 
 
 
@@ -104,4 +107,38 @@ VALUES
 alter table disfonctionnement add column idfoyer int;
 alter table disfonctionnement add constraint fk_disfonctionnement_idfoyer foreign key(idfoyer) references foyer(idfoyer);
 
+
+insert into categorie values(default,'Tranoko');
+
+insert into produitsDeVente values(default,1,'lampe controlable à distance',45,20000,'un outil pour controler vos lampes et toutes autres lumières',250);
+
+insert into produitsDeVente values(default,1,'interrupteur controlable à distance',45,20000,'controlez vos interrupteur de loin',250);
+
+INSERT INTO factureClient (idproduitsDeVente, nombre, dateAjout, idUtilisateur)
+VALUES
+    (1, 2, '2023-06-30', 3),
+    (2, 1, '2023-06-30', 3),
+    (2, 3, '2023-06-30', 3);
+
+INSERT INTO foyer (nom, motDePasse, idEmplacement)
+VALUES ('Foyer A', 'motdepasse1', 1);
+
+INSERT INTO foyer ( nom, motDePasse,idEmplacement)
+VALUES ('Foyer B', 'motdepasse2',2);
+
+insert into foyer values(default,'Rakoto','root',28);
+
+insert into utilisateur values(default,'Miora','Oliva','09-09-2004',1,'vm@gmail.com','0340000000','root',1);
+
+INSERT INTO utilisateur (nom, prenom, dateDeNaissance, idFoyer, email, numero, motDePasse, estAdmin)
+VALUES ('Doe', 'John', '1990-05-15', 1, 'john.doe@example.com', '123456789', 'motdepasse1', 0);
+
+INSERT INTO utilisateur (nom, prenom, dateDeNaissance, idFoyer, email, numero, motDePasse, estAdmin)
+VALUES ('Smith', 'Jane', '1995-08-20', 2, 'jane.smith@example.com', '987654321', 'motdepasse2', 1);
+
+INSERT INTO notification ( idPack, idUtilisateur, action, dateNotif)
+VALUES ( 2, 3, 'Le pack a été installé avec succès.', CURRENT_TIMESTAMP);
+
+INSERT INTO notification ( idPack, idUtilisateur, action, dateNotif)
+VALUES ( 2, 4, 'Il y a une mise à jour disponible pour le pack.', CURRENT_TIMESTAMP);
 

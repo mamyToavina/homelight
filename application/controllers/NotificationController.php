@@ -2,12 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class NotificationController extends CI_Controller{
     public function __construct(){
-        parent :: __construct();
+        parent::__construct();
+		$this->load->view('headerResponsive');
     }
     public function index(){
         $this->load->model("NotificationModel");
         $all['all']= $this->NotificationModel->getAllNotifForMe(3);
         $this->load->view('essai',$all);
+        $this->load->view('footer');
     }
     public function insert(){
         $donnees = array();
@@ -25,6 +27,15 @@ class NotificationController extends CI_Controller{
         require_once APPPATH.'libraries\\qrlib.php';
         $this->load->model("NotificationModel");
         $this->NotificationModel->createMyQrCode("aaaaaaannnnnnt");
+    }
+
+    public function show_notification()
+    {
+        $this->load->model("NotificationModel");
+        $all['all']= $this->NotificationModel->getAllNotifForMe();
+        $this->load->helper('url');
+        $this->load->view('notification',$all);
+        $this->load->view('footer');
     }
 }
 

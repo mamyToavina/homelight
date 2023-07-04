@@ -5,12 +5,9 @@
         }
         .ici{
             width: 100%;
-            background-repeat: no-repeat;
             background-color: #f1f1ea;
             background-blend-mode: color-burn;
             background-position-x:center;
-            background-position-y: center;
-            width:100%;
             overflow: hidden;
         }
         nav li{
@@ -40,12 +37,6 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('aide/com?id=2'); ?>">
               <span data-feather="shopping-cart"></span>
-              Ventes
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('aide/com?id=3'); ?>">
-              <span data-feather="shopping-cart"></span>
               Nous contactez
             </a>
           </li>
@@ -56,13 +47,13 @@
           </a>
         </h6>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('aide/com?id=4'); ?>">
+            <a class="nav-link" href="<?php echo site_url('aide/com?id=3'); ?>">
               <span data-feather="file-text"></span>
               site Tranoko
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('aide/com?id=5'); ?>">
+            <a class="nav-link" href="<?php echo site_url('aide/com?id=4'); ?>">
               <span data-feather="file-text"></span>
              Nos produits
             </a>

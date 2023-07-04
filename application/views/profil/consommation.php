@@ -29,27 +29,27 @@
             <form action=" <?php echo site_url('analyse/getConsommationJourParProduit'); ?> " method="get">
             <select name="idproduit">
                 <option value="">Vos produits</option>
-            <?php for($i=0;$i<count($allproduits);$i++){  ?> 
+            <?php for($i=0;$i<count($allproduits);$i++){  ?>
                 <option value="<?php echo $allproduits[$i]['idproduit']; ?>"><?php echo $allproduits[$i]['emplacement']; ?></option>
-                <?php } ?> 
+                <?php } ?>
             </select>
             <input type="submit" value="rechercher" class="sub">
             </form>
         </div>
         <div class="row recherches">
         <p>Par mois,années</p>
-            <form action=" <?php echo site_url('analyse/getConsommationJourParProduit'); ?> " method="get">
+            <form action=" <?php echo site_url('analyse/consommationm'); ?> " method="get">
             <select name="mois">
                 <option value="">Mois</option>
-            <?php for($i=1;$i<13;$i++){  ?> 
+            <?php for($i=1;$i<13;$i++){  ?>
                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                <?php } ?> 
+                <?php } ?>
             </select>
             <select name="annee">
                 <option value="">Années</option>
-            <?php for($i=2023;$i>2013;$i--){  ?> 
+            <?php for($i=2023;$i>2013;$i--){  ?>
                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                <?php } ?> 
+                <?php } ?>
             </select>
             <input type="submit" value="rechercher"  class="sub">
             </form>
@@ -92,4 +92,4 @@
     }
   });
 </script>
-  
+

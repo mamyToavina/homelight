@@ -18,6 +18,7 @@
     text-align: center;
     width: 50%;
     padding: 3%;
+
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 .form-group input{
@@ -27,6 +28,7 @@
     border-radius: 50px;
     border: 0.5px solid var(--blue);
 }
+
 .form-group select{
   width: 60%;
     margin-left: -9%;
@@ -82,7 +84,7 @@
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s; }
 .primary-btn:hover {
-    color: #fff; 
+    color: #fff;
   }
 .primary-btn:hover:before {
       left: 180px;

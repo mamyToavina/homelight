@@ -1,5 +1,6 @@
 create database tranoko;
 \c tranoko;
+
 create table emplacement(
     idEmplacement int primary key,
     nom varchar(500) default null,
@@ -67,6 +68,7 @@ create table produit(
     idPack int,
     idfactureclient int,
     description varchar(300),
+    ip varchar(100),
     foreign key(idfactureclient) references factureClient(idfactureclient),
     foreign key (idPack) references pack(idPack)
 );
@@ -123,11 +125,15 @@ create table payement(
  datePaye date not null,
  prix float not null,
  foreign key (idUtilisateur) references utilisateur(idUtilisateur)
-); 
+);
+
+create table action (
+    idaction serial primary key,
+    idUtilisateur INT,
+    dates Date default current_date,
+    foreign key (idUtilisateur) references utilisateur(idUtilisateur)
+);
 
 -- alter table produitsDeVente add column prixAbonnementService float;
-insert into categorie values(default,'Tranoko');
+select*from  produitsDeVente where idproduit = ......
 
-insert into produitsDeVente values(default,1,'lampe controlable à distance',45,20000,'un outil pour controler vos lampes et toutes autres lumières',250);
-
-insert into produitsDeVente values(default,1,'interrupteur controlable à distance',45,20000,'controlez vos interrupteur de loin',250);

@@ -17,7 +17,7 @@ class ProfilModel extends CI_Model {
         }
         return null;
     }
-    
+
     // Vérifier si la date de naissance est supérieure à 3 ans
     public function check_date($date) {
         $date_naissance = new DateTime($date);
@@ -25,9 +25,8 @@ class ProfilModel extends CI_Model {
         $difference = $date_aujourd_hui->diff($date_naissance);
         $annees = $difference->y;
 
-        return $annees >= 3;
+        return $annees >= 10;
     }
-
     public function get($requete){
         $sql=$this->db->query($requete);
         $re=array();
